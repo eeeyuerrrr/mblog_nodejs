@@ -8,10 +8,7 @@ module.exports = function(app){
 
     app.get('/login',function (req, res) {
         res.render('login',{
-            title: '登录',
-            user:User.getCurrentUser(req),
-            error:flash.getErrorInfo(req),
-            success:flash.getSuccessInfo(req)
+            title: '登录'
         });
     });
 

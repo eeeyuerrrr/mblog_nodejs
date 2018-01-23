@@ -1,8 +1,15 @@
-var express = require('express');
-var router = express.Router();
+var User = require('../models/user');
+var flash = require('../helper/flash');
+var checkLoginState = require('../helper/checkLoginState');
 
-router.post('/', function(req, res, next) {
-    res.render('index', { title: '发表' });
-});
+module.exports = function(app){
 
-module.exports = router;
+    app.get('/post',checkLoginState.shouldLogin);
+
+    app.get('/post',function (req, res) {
+        res.render('post', {
+            title: '登录'
+        });
+    });
+
+}

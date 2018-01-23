@@ -37,15 +37,14 @@
         </div>
     </div>
 </div>
-
 <div id="container" class="container">
-    <% if (success) { %>
-      <div class="alert alert-success">
-        <%= success %>
-      </div>
+    <% if (successInfo) { %>
+    <div class="alert alert-success">
+        <%= successInfo %>
+    </div>
     <% } %>
-    <% if (error) { %>
-      <div class="alert alert-error">
-        <%= error %>
-      </div>
+    <% if (errorInfo) { %>
+    <div class="alert alert-error">
+        <%= errorInfo %>
+    </div>
     <% } %>

@@ -8,10 +8,7 @@ module.exports = function(app){
 
     app.get('/reg',function (req, res) {
         res.render('reg',{
-            title: '用户注册',
-            user:User.getCurrentUser(req),
-            error:flash.getErrorInfo(req),
-            success:flash.getSuccessInfo(req)
+            title: '用户注册'
         });
     });
 

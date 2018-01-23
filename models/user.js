@@ -18,11 +18,12 @@ User.prototype.save = function save(callback) {
         if(err){
             return callback(err);
         }
-        database.db(settings.db).collection('users',function(err, collection){
+        database.db(settings.db).collection(settings.user_collection, function(err, collection){
             if(err){
                 database.close();
                 return callback(err);
             }
+            // 为 name 属性添加索引
             collection.ensureIndex('name',{unique:true});
             collection.insert( user, {safe:true}, function(err, user){
                 database.close();
@@ -37,7 +38,7 @@ User.get = function(username, callback){
         if(err){
             return callback(err);
         }
-        database.db(settings.db).collection('users',function(err, collection){
+        database.db(settings.db).collection(settings.user_collection, function(err, collection){
             if(err){
                 database.close();
                 return callback(err);

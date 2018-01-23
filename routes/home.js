@@ -4,10 +4,7 @@ var flash = require('../helper/flash');
 module.exports = function(app){
     app.get('/',function (req, res) {
         res.render('home',{
-            title: '首页',
-            user:User.getCurrentUser(req),
-            error:flash.getErrorInfo(req),
-            success:flash.getSuccessInfo(req)
+            title: '首页'
         });
     });
 }

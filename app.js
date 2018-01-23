@@ -12,6 +12,9 @@ var settings = require('./settings');
 var flash = require('connect-flash');
 var util = require('util');
 
+var flashHelper = require('./helper/flash');
+var User = require('./models/user');
+
 var app = express();
 
 // view engine setup
@@ -39,30 +42,20 @@ app.use(session({
     })
 }));
 
+
 app.use(partials()); //使用模板
 //dynamic helper 视图助手
-// app.use(function(req, res, next){
-//     res.locals.headers = req.headers;
-//     res.locals.inspect = function (obj) {
-//         return util.inspect(obj);
-//     };
-//     // next();
-//     res.locals.user= req.session.user;
-//     res.locals.error = function(){
-//         var err = req.flash('error');
-//         return 'test...';
-//         // return err.length ? err : null;
-//     };
-//     res.locals.success =function(){
-//       var succ = req.flash('success');
-//       if( succ.length ){
-//           return succ;
-//       }else{
-//           return null;
-//       }
-//     };
-//     next();
-// });
+app.use(function(req, res, next){
+    // res.locals.headers = req.headers;
+    // res.locals.path = req.path;
+    // res.locals.inspect = function (obj) {
+    //     return util.inspect(obj);
+    // };
+    res.locals.user= User.getCurrentUser(req);
+    res.locals.errorInfo = flashHelper.getErrorInfo(req);
+    res.locals.successInfo = flashHelper.getSuccessInfo(req);
+    next();
+});
 
 var routes = require('./routes/index');
 routes(app);
