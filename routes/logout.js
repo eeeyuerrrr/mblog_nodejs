@@ -1,8 +1,13 @@
-var express = require('express');
-var router = express.Router();
+var User = require('../models/user');
+var flash = require('../helper/flash');
 
-router.get('/', function(req, res, next) {
-    res.render('index', { title: 'mblog' });
-});
-
-module.exports = router;
+module.exports = function(app){
+    app.get('/logout',function (req, res) {
+        res.render('logout',{
+            title: '登出',
+            user:User.getCurrentUser(req),
+            error:flash.error(req),
+            success:flash.success(req)
+        });
+    });
+}

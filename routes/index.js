@@ -1,12 +1,15 @@
-var express = require('express');
-var router = express.Router();
+var loginRouter = require('./login');
+var homeRouter = require('./home');
+var regRouter = require('./reg');
+var doRegRouter = require('./doReg');
+var testRouter = require('./test');
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-    res.render('index', {
-        layout: 'baseLayout',
-        title: 'home'
-    });
-});
+module.exports = function(app){
 
-module.exports = router;
+  testRouter(app);
+  homeRouter(app);
+  loginRouter(app);
+  regRouter(app);
+  doRegRouter(app);
+
+};
