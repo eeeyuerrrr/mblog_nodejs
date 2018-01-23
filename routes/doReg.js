@@ -31,7 +31,7 @@ module.exports = function(app){
                     return res.redirect('/reg');
                 }
             });
-            User.setCurrentUser(newUser);
+            User.setCurrentUser(req,newUser);
             req.flash('success','注册成功');
             res.redirect('/');
         });

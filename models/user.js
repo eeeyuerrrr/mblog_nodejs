@@ -59,6 +59,6 @@ User.getCurrentUser = function(req){
     return req.session.user;
 }
 
-User.setCurrentUser = function(user){
+User.setCurrentUser = function(req,user){
     req.session.user = user;
 }
