@@ -6,8 +6,8 @@ module.exports = function(app){
         res.render('home',{
             title: '首页',
             user:User.getCurrentUser(req),
-            error:flash.error(req),
-            success:flash.success(req)
+            error:flash.getErrorInfo(req),
+            success:flash.getSuccessInfo(req)
         });
     });
 }

@@ -62,3 +62,7 @@ User.getCurrentUser = function(req){
 User.setCurrentUser = function(req,user){
     req.session.user = user;
 }
+
+User.clearCurrentUser = function(req){
+    req.session.user = null;
+}

@@ -1,10 +1,15 @@
 var crypto = require('crypto');
 var User = require('../models/user');
+var flash = require('../helper/flash');
+var checkLoginState = require('../helper/checkLoginState');
 
 module.exports = function(app){
+
+    app.post('/doReg', checkLoginState.shouldNotLogin);
+
     app.post('/doReg',function(req, res){
         if( req.body['password-repeat'] != req.body['password'] ){
-            req.flash('error','两次输入的口令不一致');
+            flash.setErrorInfo(req,'两次输入的口令不一致');
             return res.redirect('/reg');
         }
 
@@ -21,18 +26,18 @@ module.exports = function(app){
                 err = '用户名已存在';
             }
             if(err){
-                req.flash('error',err);
+                flash.setErrorInfo(req,err);
                 return res.redirect('/reg');
             }
 
             newUser.save(function (err) {
                 if(err){
-                    req.flash('error',err);
+                    flash.setErrorInfo(req,err);
                     return res.redirect('/reg');
                 }
             });
             User.setCurrentUser(req,newUser);
-            req.flash('success','注册成功');
+            flash.setErrorInfo(req,err);
             res.redirect('/');
         });
     });
