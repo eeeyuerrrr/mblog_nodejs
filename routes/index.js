@@ -5,6 +5,8 @@ var regRouter = require('./reg');
 var doRegRouter = require('./doReg');
 var doLoginRouter = require('./doLogin');
 var logOutRouter = require('./logout');
+var postRouter = require('./post');
+var userRouter = require('./user');
 
 
 module.exports = function(app){
@@ -15,6 +17,8 @@ module.exports = function(app){
   doLoginRouter(app);
   regRouter(app);
   doRegRouter(app);
-  logOutRouter(app)
+  logOutRouter(app);
+  postRouter(app);
+  userRouter(app);
 
 };

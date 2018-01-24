@@ -1,0 +1,11 @@
+<% include header.ejs %>
+
+<% if(user){ %>
+<%- include post.ejs %>
+<% } %>
+
+<% if( posts && posts.length > 0 ){ %>
+<%- include postList.ejs %>
+<% } %>
+
+<%- include footer.ejs %>
