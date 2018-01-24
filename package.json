@@ -16,6 +16,7 @@
     "express": "~4.13.4",
     "express-partials": "^0.3.0",
     "express-session": "^1.15.6",
+    "file-stream-rotator": "^0.2.0",
     "mongodb": "^3.0.1",
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0"

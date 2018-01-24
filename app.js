@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var partials = require('express-partials');
+var fs = require('fs');
+var FileStreamRotator = require('file-stream-rotator');
 
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
@@ -24,7 +26,21 @@ app.use(flash());
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', '/images/favicon.png')));
+//console日志
 app.use(logger('dev'));
+//文件日志
+var logDirectory = __dirname + '/log';
+fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);// ensure log directory exists
+var accessLogStream = FileStreamRotator.getStream({
+    date_format: 'YYYYMMDD',
+    filename: logDirectory + '/%DATE%.log',
+    frequency: 'daily',
+    verbose: false
+});
+app.use(logger('combined', {
+    stream: accessLogStream
+}));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -39,7 +55,9 @@ app.use(session({
         host: settings.host,
         port: settings.port,
         url: settings.url
-    })
+    }),
+    resave: true,
+    saveUninitialized: true
 }));
 
 
